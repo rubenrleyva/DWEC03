@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+Desarrollo web en estorno cliente.
+Unidad 3 - Estructuras definidas por el usuario en JavaScript.
+Tarea 3: Bienvenidos a Mejor No Compres... a los demás.
+@author : Rubén Ángel Rodriguez Leyva
+-->
+<html>
+    <head>
+        <title>Tarea 3: Bienvenidos a Mejor No Compres... a los demás</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="dni.js"></script>
+        <script type="text/javascript" src="clases.js"></script>
+        <style type="text/css">
+            header { text-align: center; }
+            footer { text-align: center; }      
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Unidad 3 - Estructuras definidas por el usuario en JavaScript</h1>
+            <h2>Tarea 3: Bienvenidos a Mejor No Compres... a los demás.</h2>
+        </header>
+        <div>
+            <script>
+                
+                // Ahora vamos a utilizar algunos métodos y propiedades para demostrar que funcionan.
+                document.write("<br><h3><u><strong> Vamos a comprobar el funcionamiento \"normal\", sin errores al introducir datos: </strong></u></h3>");
+                
+                // Creamos la lista de categorías.
+                var listaCategorias = new Categorias();
+        
+                // Añadimos categorías al objeto creado.
+                listaCategorias.crearCategoria("Componentes");
+                listaCategorias.crearCategoria("Ordenadores");
+                listaCategorias.crearCategoria("SmartPhones");
+                listaCategorias.crearCategoria("Periféricos");
+                listaCategorias.crearCategoria("Audio/Foto/Vídeo");
+                listaCategorias.crearCategoria("Televisores");
+                listaCategorias.crearCategoria("Tablets/Ebooks");
+                listaCategorias.crearCategoria("Consolas/Gaming");
+        
+                // Mostramos las categorías que hay en tienda
+                document.write("<strong> Lista de categorías que hay en tienda: </strong><br>");
+                document.write(listaCategorias);
+	
+                // Creamos los diferentes productos.		
+                var item1 = new Item("placa base Gigabyte", 63.95, "Socket Intel 1151 y chipset B250", "Componentes", true);
+                var item2 = new Item("portátil HP", 749, "Intel Core i5-6300HQ/8GB/1TB/GTX 950M/15.6", "Ordenadores", true);
+                var item3 = new Item("teléfono móvil Xiaomi Redmi 4X", 149, "32GB Negro Libre", "SmartPhones", false);
+                var item4 = new Item("monitor Benq GW2470HE", 125, "23.8 LED Full HD", "Periféricos", false);
+                var item5 = new Item("televisor Samsung UE55MU6120", 599, "55 LED UltraHD 4K", "Televisores", true);
+                var item6 = new Item("tablet Leotec Supernova i8", 89.99, "10.1 IPS 8GB Negra", "Tablets", false);
+                var item7 = new Item("videoconsola Sony PlayStation 4 Slim", 341, "1TB + Fifa 18", "Consolas/Gaming", true);
+                var item8 = new Item("home cinema Denon AVR-X1400H base", 379, "Receptor AV 4K/3D/ Wifi/Bluetooth", "Audio/Foto/Vídeo", true);	
+        
+                // Mostramos los diferentes productos que hay en la tienda.
+                document.write("<br><strong> Lista de productos que se encuentran en la tienda: </strong><br>");		
+                document.write(item1);
+                document.write(item2);
+                document.write(item3);
+                document.write(item4);
+                document.write(item5);
+                document.write(item6);
+                document.write(item7);
+                document.write(item8);
+			
+                // Creamos dos clientes para la tienda.	
+                var cliente1 = new Comprador("Rubén", "Rodriguez", "Leyva", "Calle Manuel Cano, Santa Fe(Granada)", "77096260F");    
+                var cliente2 = new Comprador("Ángel", "Perez", "Martin", "Calle Mangurrino, Belicena(Granada)", "75130753B");
+        
+                // Mostramos los clientes de la tienda.
+                document.write("<br><strong>Lista de clientes de la tienda: </strong><br>");		
+                document.write(cliente1);     
+                document.write(cliente2);
+                    	
+                // Creamos los carros para los clientes.		
+                var carro1 = new Carro(cliente1);
+                var carro2 = new Carro(cliente2);
+	
+                // Añadimos tres productos a al carro 1 del cliente 1.
+                carro1.anadeItem(item1);
+                carro1.anadeItem(item2);
+                carro1.anadeItem(item3);
+                carro1.anadeItem(item4);
+                carro1.anadeItem(item5);
+                carro1.anadeItem(item6);
+		
+                // Añadimos dos productos a al carro 2 del cliente 2.
+                carro2.anadeItem(item7);
+                carro2.anadeItem(item8);
+	
+                // Se muestran los datos del carro1
+                document.write("<br><strong>Datos del carro del cliente: "+carro1.cliente.getNombre()+".</strong><br>");		
+                document.write(carro1);
+		
+                // Se muestran los datos del carro2
+                document.write("<br><strong>Datos del carro del cliente: "+carro2.cliente.getNombre()+".</strong><br>");
+                document.write(carro2);
+        
+                // Ahora vamos a realizar algunos cambios para comprobar el funcionamiento de algunas funciones y métodos.
+                document.write("<br><h3><u><strong> Vamos a comprobar el funcionamiento de algunos métodos y propiedades: </strong></u></h3>");
+                
+                // Probamos a quitar una categoría.
+                listaCategorias.eliminarCategoria("Consolas/Gaming");
+        
+                // Volvemos a mostrar la lista para comprobar que se ha borrado la categoría.
+                document.write("<strong> Nueva lista de categorías que hay en tienda (se ha borrado la categoría Consolas/Gaming): </strong><br>");
+                document.write(listaCategorias);
+                
+                // Vamos a cambiar la categoría del Item1 para comprobar que en caso de no existir la misma en Categorías nos lo indica mediante "Sin Categoría"
+                document.write("<br><strong> Nueva lista del producto que se encuentra en la tienda (se ha cambiado el item1 a 'Sin categoría'): </strong><br>");	
+                item1.setCategoria(comprobarCategoria(listaCategorias.ArrayListado, "PCCompleto"));
+                document.write(item1);
+                
+                
+                // Cambiamos el nif y el nombre del cliente1, mostrando un resultado negativo debido al nif es incorrecto y
+                // además se pone 'es incorrecto' en el lugar donde debería de ir el nif.
+                cliente1.setNombre("Pedro");
+                cliente1.setNif("312345678");
+                document.write("<br><strong>Lista de clientes de la tienda (se ha cambiado el nombre y el nif/dni): </strong><br>");	
+                document.write(cliente1);
+        
+
+                // Ahora vamos a quitar del carro1 uno de los Item
+                carro1.eliminaItem(item3);
+        
+                // Volvemos a mostrar el carro1 para comprobar que el Item ha desaparecido.
+                document.write("<br><strong>Datos del carro del cliente (se ha borrado el item3): "+carro1.cliente.getNombre()+".</strong><br>");		
+                document.write(carro1);
+                
+                
+                
+            </script>
+        </div>
+        <footer>
+            <h3>Rubén Ángel Rodriguez Leyva - DWEC</h3>
+        </footer>
+    </body>
+</html>
